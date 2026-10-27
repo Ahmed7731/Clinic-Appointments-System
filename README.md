@@ -10,4 +10,4 @@
 | 20242253 | Mark Emad | - | - | - |
 | 20242314 | Mahmoud Sultan | - | - | - |
 
-Conflict Drill: UNCLAIMED
+Conflict Drill: omar ali
