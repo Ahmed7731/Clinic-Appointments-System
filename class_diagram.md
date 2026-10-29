@@ -17,11 +17,16 @@ classDiagram
     direction TB
 
     class Patient {
+        +id : String
+        +name : String
         +viewDoctorAvailability()
         +bookAppointment()
     }
 
     class Doctor {
+        +id : String
+        +name : String
+        +specialty : String
         +getAvailableTimeSlots()
         +acceptAppointment()
         +declineAppointment()
@@ -29,20 +34,28 @@ classDiagram
     }
 
     class Appointment {
+        +appointmentId : String
+        +date : DateTime
         +status : AppointmentStatus
         +createRequest()
         +updateStatus()
     }
 
     class TimeSlot {
+        +slotId : String
+        +dateTime : DateTime
         +isAvailable : Boolean
     }
 
     class MedicalRecord {
+        +recordId : String
         +data : String
     }
 
     class AuthorizedClinicStaff {
+        +id : String
+        +name : String
+        +isAuthorized : Boolean
         +accessMedicalData()
     }
 
@@ -74,17 +87,3 @@ classDiagram
     note for Patient "Max Upcoming Appointments Constraint:\n{self.appointments->select(a | a.status = 'Pending' or a.status = 'Accepted')->size() <= N}"
     note for MedicalRecord "Authorization Constraint:\nstaff.isAuthorized == true"
     note for Appointment "Time Slot Availability Constraint:\nSlot must be available when created"
-```
-
----
-
-## Business Constraints & Multiplicities
-
-1. **Appointment Status Constraint:**
-   - Managed via the `AppointmentStatus` enumeration (`Pending`, `Accepted`, `Declined`).
-2. **Maximum Upcoming Appointments Constraint (OCL):**
-   - `{self.appointments->select(a | a.status = 'Pending' or a.status = 'Accepted')->size() <= N}` applied to `Patient` to meet Requirement R4.
-3. **Authorization Constraint:**
-   - Access to `MedicalRecord` requires staff permission validation (`staff.isAuthorized == true`).
-4. **Time Slot Availability Constraint:**
-   - An `Appointment` can only reserve a `TimeSlot` if `TimeSlot.isAvailable == true`.
