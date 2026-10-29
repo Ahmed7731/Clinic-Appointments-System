@@ -14,7 +14,8 @@ sequenceDiagram
     SC-->>P: Display available doctors
     P->>SC: Select a doctor
     SC->>D: getAvailableTimeSlots()
-    D->>T: isAvailable == true
+    D->>T: check availability
+    T-->>D: isAvailable == true
     alt Slots found
         T-->>D: Available time slots
         D-->>SC: Available days and time slots
@@ -104,8 +105,8 @@ sequenceDiagram
 
     S->>SC: Open patient records section
     SC->>SC: verifyStaffAuthorization()
-    SC->>S: isAuthorized
-    S-->>SC: isAuthorized == true
+    SC->>SC: verifyStaffAuthorization()
+    SC-->>S: Access granted
     S->>SC: accessMedicalData()
     SC->>M: data
     alt Record exists
