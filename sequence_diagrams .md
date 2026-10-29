@@ -105,7 +105,6 @@ sequenceDiagram
 
     S->>SC: Open patient records section
     SC->>SC: verifyStaffAuthorization()
-    SC->>SC: verifyStaffAuthorization()
     SC-->>S: Access granted
     S->>SC: accessMedicalData()
     SC->>M: data
